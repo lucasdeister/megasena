@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MEGA-SENA</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+    <div class="grid-container">
+        <header>
+            <div class="cabecalho">
+                <h1>MEGA-SENA</h1>
+            </div>
+        </header>
+        <section id="myModal" class="modal">
+            <div class="container_modal">
+                <div class="modal-content">
+                    <form class="formPrincipal">
+                        <span class="close" onclick="fecharModalCriacao()">&times;</span>
+                        <h3 id="tituloModal" class="tituloModal">Criar jogo</h3>
+                        <input type="radio" onclick="exibirOpcoesTipoManual()" id="manual" name="tipo" value="Manual" checked>
+                        <label for="manual">Manual</label>
+                        <input type="radio" onclick="exibirOpcoesTipoAutomatico()" id="automatico" name="tipo" value="Automático">
+                        <label for="automatico">Automático</label><br><br>
+                        <input class="tpManual" id="campo_jogo_manual" type="text" onfocusout = "mask(document.getElementById('campo_jogo_manual').value)" value="">
+                        <a class="tpManual" id="btnGerarManual" onclick="gerarManual()" href="#">Gerar</a>
+                        <label class="tpAutomatico" for="lDezenas">Dezenas:</label>
+                        <input class="tpAutomatico" type="number" id="dezenas" min="6" max="15" value="6">
+                        <label class="tpAutomatico" for="lqtdJogos">Jogos:</label>
+                        <input class="tpAutomatico" type="number" id="qtdJogos" min="1" max="999" value="3">
+                        <a class="tpAutomatico" id="btnGerar" onclick="gerar()" href="#">Gerar</a>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id="myModal2" class="modal">
+            <div class="container_modal2">
+                <div class="modal-content2" onclick="preencherCampoDezenaEdicao()">
+                    <form class="formPrincipal">
+                        <span class="close" onclick="fecharModalEdicao()">&times;</span>
+                        <h3 id="tituloModal" class="tituloModal">Editar jogo</h3>
+                        <label for="lqJogo">Jogo:</label>
+                        <input type="text" id="jogo_edicao" min="1" max="999" value="">
+                        <label for="lDezenas">Dezena:</label>
+                        <input type="number" id="dezenas_edicao" disabled>
+                        <a id="btnSalvar" onclick="editarJogo(item_editado)" href="#">Salvar</a>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id="myModal3" class="modal">
+            <div class="container_modal3">
+                <div class="modal-content3">
+                    <form class="formPrincipal">
+                        <span class="close" onclick="fecharModalVerificacao()">&times;</span>
+                        <h3 id="tituloModal" class="tituloModal">Verificar acertos</h3>
+                        <label for="lqJogoSorteado">Jogo sorteado:</label>
+                        <input type="text" id="jogo_sorteado" min="1" max="999" value="">
+                        <a id="btnVerificarModal" class="btnsPrincipais" onclick="verificarAcertos()" href="#">Verificar</a>
+                        <h4 id="tituloApresentacao">Jogos acertados:</h4>
+                        <div id="jogos_acertados"><br>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <main>
+            <h2>Criar jogos Mega-Sena</h2>
+            <hr>
+            <a id="btnCriar" class="btnsPrincipais" onclick="exibirModalCriacao()">Criar</a>
+            <a id="btnCopiar" class="btnsPrincipais" onclick="copiarJogos()">Copiar</a>
+            <a id="btnVerificar" class="btnsPrincipais" onclick="exibirModalVerificacao()">Verificar acertos</a>
+            <a id="btnExcluirGrupo" class="btnExcluir" onclick="apagarGrid()">Limpar</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Dezenas</th>
+                        <th>Jogo</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </main>  
+        <footer>
+            <div class="container-rodape">
+                <div class="descricao">Design by - Lucas Deister</div>
+                <a class="icones" href="https://www.instagram.com/lucasdeister7/">
+                <img src="..\icones\icons8-instagram-32.png" alt="instagram"></a>
+                <a class="icones" href="mailto:lucasdeister7@hotmail.com">
+                <img src="..\icones\icons8-mensagem-32.png" alt="email"></a> 
+            </div>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript" src="../javascript/index.js"></script>
+</html>
+
+
+<!-- glassdor
+indeed
+-->
