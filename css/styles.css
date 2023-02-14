@@ -1,0 +1,419 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Lucida Sans';
+}
+
+
+header { grid-area: header; }
+main { grid-area: main; }
+footer { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+  'header header header header header'
+  'main main main main main'
+  'footer footer footer footer footer';
+  gap: 10px;
+}
+
+.grid-container main, footer{
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+
+#btnExcluirGrupo{
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 3%;
+    margin-left: 5px;
+}
+
+#btnVerificar{
+    background-color: #2326b2;
+}
+
+#btnVerificar:hover{
+    background-color: #264aeb;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+#btnCriar{
+    background-color: #23ac2c;
+}
+
+#btnCriar:hover{
+    background-color: #20c72b;
+}
+
+.formPrincipal{
+    margin-left: 10px;
+}
+
+#btnGerar{
+    position: relative;
+    top: 10px;
+    left: 7%;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    background-color: #23ac2c;
+    padding: 10px 30px;
+    border-radius: 3%;
+} 
+
+#btnGerar:hover{
+    background-color: #20c72b;
+}
+
+
+#btnSalvar{
+    margin-left: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    background-color: #23ac2c;
+    padding: 10px 30px;
+    border-radius: 3%;
+} 
+
+#btnSalvar:hover{
+    background-color: #20c72b;
+}
+
+#btnVerificarModal{
+    background-color: #23ac2c;
+} 
+
+#btnVerificarModal:hover{
+    background-color: #20c72b;
+}
+
+
+h1, h2{
+    font-weight: 400;
+    margin-top: 10px;
+    font-size: 25px;
+    margin-bottom: 40px;
+}
+
+tr{
+    height: 130px;
+}
+
+th {
+    border-bottom: 2px solid lightgray;
+}
+
+table tr:nth-child(even){
+    background: rgb(223, 222, 222);
+}
+
+th, td{
+    text-align: center;
+    font-size: 18px;
+}
+
+table{
+    width: 100%;
+    box-sizing: border-box;
+    border-collapse:collapse;
+}
+
+
+th{
+    width: 500px;
+}
+
+.acoes{
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    color: white;
+    margin-top: 10%;
+    margin-left: 20px;
+    width: 100px;
+    height: 50px;
+}
+
+.btnEditar{
+    background-color: #1568d4;
+}
+
+.btnEditar:hover{
+    background-color: #0670f9;
+}
+
+.btnExcluir{
+    background-color: #c72424;
+}
+
+.btnExcluir:hover{
+    background-color: #e32121;
+}
+
+
+hr{
+    margin: 1em 0;
+    border: solid lightgray 2px;
+    background-color: lightgray;
+    margin-top: 15px;
+}
+
+
+
+.container-rodape{
+    padding: 5px;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    background-color: steelblue;
+    border: solid black 1px;
+    height: 20px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    color: black;
+}
+
+
+.icones{
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.icones:hover{
+    filter: invert(70%);
+} 
+
+
+.descricao{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+
+.cabecalho{
+    padding-top: 25px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(33, 31, 31);
+    border-bottom: solid steelblue 4px;
+    color: rgb(225, 224, 224); 
+}
+
+
+
+.tituloModal{
+    font-family: Arial;
+    color: rgb(39, 36, 36);
+    font-weight: 800;
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    top: -38px;
+    text-transform: uppercase;
+}
+
+
+
+  .close {
+    padding: 25px;
+    position: relative;
+    left: 95%;
+    top: -25px;
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  
+  .close:hover {
+    color: #000;
+    cursor: pointer;
+  }
+
+
+
+
+
+
+  input[type=number], input[type=text]{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+  }
+
+
+
+
+label, input[type=button]{
+    margin-left: 10px;
+  } 
+
+
+.formPrincipal label{
+    margin-bottom: 13px;
+}
+
+ 
+
+  .formPrincipal input{
+    margin-bottom: 30px;
+    font-size: 25px;
+    padding: 10px;
+    width: 13%;
+  }
+
+  .modal {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .container_modal{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .modal-content {
+    font-size: 15px;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 25%;
+    height: 25%;
+  }
+
+
+  .container_modal2{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container_modal3{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#jogo_edicao{
+    width: 100%;
+}
+
+#dezenas_edicao{
+    width: 10%;
+}
+
+
+.modal-content2 {
+    font-size: 15px;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 32%;
+    height: 25%;
+  }
+
+  .modal-content3 {
+    font-size: 15px;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    width: 32%;
+    height: 50%;
+  }
+
+
+.tpAutomatico{
+    display: none;
+}
+
+
+#campo_jogo_manual{
+    width: 59.2%;
+}
+
+#btnGerarManual{
+    position: relative;
+    top: 10px;
+    left: 9%;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    background-color: #23ac2c;
+    padding: 10px 30px;
+    border-radius: 3%;
+} 
+
+#btnGerarManual:hover{
+    background-color: #20c72b;
+}
+
+
+#jogo_sorteado{
+    width: 40%;
+}
+
+p{
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.paragrafos{
+    margin-top: 2%;
+}
+
+#tituloApresentacao{
+    display: none;
+    margin-top: 50px;
+}
+
+
+#acertos{
+    position: absolute;
+    left: 50%;
+}
+
+
+#btnCopiar{
+    background-color: #c0bb22;
+}
+
+#btnCopiar:hover{
+    background-color: #d2cd26;
+}
+
+.btnsPrincipais{
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 3%;
+    margin-left: 5px;
+}
