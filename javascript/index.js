@@ -266,7 +266,6 @@ function gerarManual(){
   function verificarAcertos(){
 
     exibirTituloApresentacao();
-    loadItens();
     limparParagrafos();
     objNumerosSorteados = [];
     let jogo_sorteado = document.querySelector('#jogo_sorteado').value;
