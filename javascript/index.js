@@ -451,6 +451,13 @@ function abrirModalSelecaoArquivo(){
   input.click();
 }
 
+function formatarNumeros(arr) {
+  return arr.map(function(item) {
+    return item.split('-').map(function(number) {
+      return number.toString().padStart(2, '0');
+    }).join('-');
+  });
+}
 
 function importarBase(conteudo_base){
 
@@ -466,14 +473,6 @@ function importarBase(conteudo_base){
 
   for (const i in newArray) {
     arrayJogosImportacao[i] = newArray[i].join('-');
-  }
-
-  function formatarNumeros(arr) {
-    return arr.map(function(item) {
-      return item.split('-').map(function(number) {
-        return number.toString().padStart(2, '0');
-      }).join('-');
-    });
   }
   
   arrayJogosImportacao = formatarNumeros(arrayJogosImportacao);
