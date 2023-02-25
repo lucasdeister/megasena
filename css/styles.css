@@ -397,7 +397,7 @@ p{
 
 #acertos{
     position: absolute;
-    left: 50%;
+    left: 57%;
 }
 
 
@@ -417,3 +417,21 @@ p{
     border-radius: 3%;
     margin-left: 5px;
 }
+
+#btnExportar{
+    background-color: #db720a;
+}
+
+#btnExportar:hover{
+    background-color: #ee7b07;
+}
+
+#btnImportar{
+    background-color: #11bec4;
+}
+
+#btnImportar:hover{
+    background-color: #0fcfd6;
+}
+
+

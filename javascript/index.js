@@ -281,45 +281,41 @@ function gerarManual(){
     }
 
     let arrayPrincipal = [...arrayJogos];
+    let arrayAux = arrayPrincipal;
 
     let z = 0;
 
-    for(let i = 0; i < arrayPrincipal.length; i++){
+    for(let i = 0; i < arrayAux.length; i++){
       qtd_acertos = 0;
       z = 0;
-      for (let j = 0; (j < arrayPrincipal[i].length); j++) {
+      for (let j = 0; (j < arrayAux[i].length); j++) {
         if(qtd_acertos != 6){
-          if(arrayPrincipal[i][z] == jogo_sorteado[j]){
+          if(jogo_sorteado.includes(arrayAux[i][z])) {
             qtd_acertos++;
-            z++;
           }
+          z++;
         }
-        if(qtd_acertos == 6 || j == arrayPrincipal[i].length -1 && qtd_acertos >= 4){
+        if(z == arrayAux[i].length && qtd_acertos > 3){
           preencherObjJogosPremiadosNoArray(arrayPrincipal[i], qtd_acertos);
           qtd_acertos = 0;
           z = 0;
           break;
-        }else{
-          if(j == arrayPrincipal[i].length-1 && z < arrayPrincipal[i].length-1){
-            z++;
-            j = -1;
-          }
         }
       }
     }
 
-    let objEmArrayJogos = transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados);
-    let objEmArrayAcertos = transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados);
+      let objEmArrayJogos = transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados);
+      let objEmArrayAcertos = transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados);
+  
+      let arrayJogosParagrafo = obterArrayJogos(objEmArrayJogos);
+      let arrayAcertosParagrafo = obterArrayAcertos(objEmArrayAcertos);
 
-    let arrayJogosParagrafo = obterArrayJogos(objEmArrayJogos);
-    let arrayAcertosParagrafo = obterArrayAcertos(objEmArrayAcertos);
-
-    criarParagrafosJogos(arrayJogosParagrafo, arrayAcertosParagrafo);
-
-    for (const i in itens) {
-      itens[i].jogo = itens[i].jogo.replaceAll(',', '-');
+      criarParagrafosJogos(arrayJogosParagrafo, arrayAcertosParagrafo);
+  
+      for (const i in itens) {
+        itens[i].jogo = itens[i].jogo.replaceAll(',', '-');
+      }
     }
-  }
 
   function obterArrayJogos(arrayJogos){
 
@@ -365,8 +361,6 @@ function exibirTituloApresentacao(){
 function esconderTituloApresentacao(){
   document.getElementById('tituloApresentacao').style.display = 'none';
 }
-
-
   function transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados){
 
     let arrayNumerosSorteados = [];
@@ -388,13 +382,20 @@ function habilitarBotaoCopiar(){
   document.getElementById('btnCopiar').style.cursor = 'pointer';
 }
 
+function habilitarBotaoExportar(){
+  document.getElementById('btnCopiar').style.opacity = '1';
+  document.getElementById('btnCopiar').style.cursor = 'pointer';
+}
 
- function copiarJogos(){
+
+ function copiarJogos(acao){
 
   let str = '';
 
-  document.getElementById('btnCopiar').style.opacity = '0.5';
-  document.getElementById('btnCopiar').style.cursor = 'initial';
+  if(acao == 'copiar'){
+    document.getElementById('btnCopiar').style.opacity = '0.5';
+    document.getElementById('btnCopiar').style.cursor = 'initial';
+  }
 
   for (let i = 0; i < itens.length; i++) {
     if(i == itens.length-1){
@@ -406,7 +407,12 @@ function habilitarBotaoCopiar(){
   }
 
   str = str.replaceAll("-", " ");
-  navigator.clipboard.writeText(str);
+
+  if(acao == 'copiar'){
+    navigator.clipboard.writeText(str);
+  }
+
+  return str;
 }
 
   function mask(valor_campo) {
@@ -425,94 +431,78 @@ function habilitarBotaoCopiar(){
 
 
 
+function exportarBase(){
+
+  const content = copiarJogos();
+
+  var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+
+  const link = document.createElement("a");
+  const file = new Blob([content], { type: 'text/plain' });
+  link.href = URL.createObjectURL(file);
+  link.download = "jogos:" + utc + "_qtd_" + itens[itens.length-1].id + ".txt";
+  link.click();
+  URL.revokeObjectURL(link.href);
+
+}
 
 
+function abrirModalSelecaoArquivo(){
+  input.type = 'file';
+  input.click();
+}
 
 
+function importarBase(conteudo_base){
 
+  conteudo_base = conteudo_base.replaceAll(" ", ",");
+  conteudo_base = conteudo_base.split('\n');
+  let newArray = conteudo_base.map(function(str) {
+    return str.split(",").map(Number);
+  });
 
+  apagarGrid();
 
+  let arrayJogosImportacao = [];
 
+  for (const i in newArray) {
+    arrayJogosImportacao[i] = newArray[i].join('-');
+  }
 
+  function formatarNumeros(arr) {
+    return arr.map(function(item) {
+      return item.split('-').map(function(number) {
+        return number.toString().padStart(2, '0');
+      }).join('-');
+    });
+  }
+  
+  arrayJogosImportacao = formatarNumeros(arrayJogosImportacao);
 
+  for (const i in newArray) {
+    itens.push({'id': id, 'dezena': newArray[i].length, 'jogo': arrayJogosImportacao[i]})
+    id++;
+  }
+  setItensBD();
+  loadItens();
+}
 
+let input = document.createElement('input');
 
+input.onchange = e => { 
+  let file = e.target.files[0]; 
+  let reader = new FileReader();
+  reader.readAsText(file,'UTF-8');
+  reader.onload = readerEvent => {
+    let conteudo_base = readerEvent.target.result;
+    input.value = '';
+    importarBase(conteudo_base);
+    }
+  }
 
-
-
-
-
-
-// function leech(v){
-//   v=v.replace(/o/gi,"0")
-//   v=v.replace(/i/gi,"1")
-//   v=v.replace(/z/gi,"2")
-//   v=v.replace(/e/gi,"3")
-//   v=v.replace(/a/gi,"4")
-//   v=v.replace(/s/gi,"5")
-//   v=v.replace(/t/gi,"7")
-//   return v
-// }
-// function soNumeros(v){
-//   return v.replace(/\D/g,"")
-// }
-
-// function telefone(v){
-//   v=v.replace(/\D/g,"")                 //Remove tudo o que não é dígito
-//   v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parênteses em volta dos dois primeiros dígitos
-//   v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hífen entre o quarto e o quinto dígitos
-//   return v
-// }
-// function cpf(v){
-//   v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
-//   v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-//   v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-//                                            //de novo (para o segundo bloco de números)
-//   v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
-//   return v
-// }
-// function cep(v){
-//   v=v.replace(/D/g,"")                //Remove tudo o que não é dígito
-//   v=v.replace(/^(\d{5})(\d)/,"$1-$2") //Esse é tão fácil que não merece explicações
-//   return v
-// }function soNumeros(v){
-//   return v.replace(/\D/g,"")
-// }
-
-// function cpf(v){
-//   v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
-//   v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-//   v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-//                                            //de novo (para o segundo bloco de números)
-//   v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
-//   return v
-// }
-// function mdata(v){
-//   v=v.replace(/\D/g,"");
-//   v=v.replace(/(\d{2})(\d)/,"$1/$2");
-//   v=v.replace(/(\d{2})(\d)/,"$1/$2");
-
-//   v=v.replace(/(\d{2})(\d{2})$/,"$1$2");
-//   return v;
-// }
-// function mcc(v){
-//   v=v.replace(/\D/g,"");
-//   v=v.replace(/^(\d{4})(\d)/g,"$1 $2");
-//   v=v.replace(/^(\d{4})\s(\d{4})(\d)/g,"$1 $2 $3");
-//   v=v.replace(/^(\d{4})\s(\d{4})\s(\d{4})(\d)/g,"$1 $2 $3 $4");
-//   return v;
-// }
-
-// document.getElementById('w3review').value = JSON.stringify(objNumerosSorteados);
-//parametros para teste
-//1-2-3-4-5-6-7-8
-//1-2-3-40-50-60
-//3-4-5-6-20-40
-//10-20-30-40-50-60
-
-// arrayJogosCadastrados = [8-21-23-37-52-57, 5-16-18-23-50-54] ==
-//arrayJogosCadastrados = [[8,21,23,37,52,57], [5,16,18,23,50,54]]
-
+function importar(){
+  abrirModalSelecaoArquivo();
+}
 
 
 
