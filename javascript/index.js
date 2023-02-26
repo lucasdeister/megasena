@@ -182,8 +182,7 @@ function fecharModalEdicao(){
 }
 
 function fecharModalVerificacao(){
-  limparParagrafos();
-  esconderTituloApresentacao();
+  limparResultado();
   modal3.style.display = "none";
 }
 
@@ -265,8 +264,7 @@ function gerarManual(){
 
   function verificarAcertos(){
 
-    exibirTituloApresentacao();
-    limparParagrafos();
+    limparResultado();
     objNumerosSorteados = [];
     let jogo_sorteado = document.querySelector('#jogo_sorteado').value;
     jogo_sorteado = jogo_sorteado.replaceAll('-', ',');
@@ -303,18 +301,23 @@ function gerarManual(){
       }
     }
 
+    if(objNumerosSorteados.length != 0){
       let objEmArrayJogos = transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados);
       let objEmArrayAcertos = transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados);
   
-      let arrayJogosParagrafo = obterArrayJogos(objEmArrayJogos);
-      let arrayAcertosParagrafo = obterArrayAcertos(objEmArrayAcertos);
+      let arrayJogosResultado = obterArrayJogos(objEmArrayJogos);
+      let arrayAcertosResultado = obterArrayAcertos(objEmArrayAcertos);
 
-      criarParagrafosJogos(arrayJogosParagrafo, arrayAcertosParagrafo);
+      preencherResultado(arrayJogosResultado, arrayAcertosResultado);
   
       for (const i in itens) {
         itens[i].jogo = itens[i].jogo.replaceAll(',', '-');
       }
     }
+    else{
+      document.querySelector('#campo_resultado').value = 'Nenhum jogo acertado';
+    }
+  }
 
   function obterArrayJogos(arrayJogos){
 
@@ -334,32 +337,22 @@ function gerarManual(){
     return arrayAcertos;
   }
 
-  function criarParagrafosJogos(arrayJogos, arrayAcertos) {
+  function preencherResultado(arrayJogos, arrayAcertos) {
+
+    let campo_resultado = document.querySelector('#campo_resultado');
 
     for (let i in arrayJogos) {
-      let span = document.createElement('span');
-      span.setAttribute("class", "paragrafos");
-      span.innerHTML = `<p><span id="jogo">${arrayJogos[i]}</span><span id="acertos">${arrayAcertos[i]}</span></p>`;
-      document.getElementById("jogos_acertados").appendChild(span);
+      campo_resultado.value = campo_resultado.value + arrayJogos[i] + " " + arrayAcertos[i] + "\n\n";
     }
   }
 
-  function limparParagrafos(){
-    if (document.getElementById('jogo') != null){
-      var element = document.getElementsByTagName("p"), index;
-      for (index = element.length - 1; index >= 0; index--) {
-        element[index].parentNode.removeChild(element[index]);
-      }
-    }
+  function limparResultado(){
+
+    let campo_resultado = document.querySelector('#campo_resultado');
+
+    campo_resultado.value = '';
   }
 
-function exibirTituloApresentacao(){
-  document.getElementById('tituloApresentacao').style.display = 'block';
-}
-
-function esconderTituloApresentacao(){
-  document.getElementById('tituloApresentacao').style.display = 'none';
-}
   function transformarArrayObjJogosSorteadosEmArray(objNumerosSorteados){
 
     let arrayNumerosSorteados = [];
@@ -501,8 +494,5 @@ input.onchange = e => {
 function importar(){
   abrirModalSelecaoArquivo();
 }
-
-
-
 
 

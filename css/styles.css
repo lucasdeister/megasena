@@ -250,7 +250,7 @@ hr{
 
 
 
-  input[type=number], input[type=text]{
+  input[type=number], [type=text]{
     border-top: none;
     border-left: none;
     border-right: none;
@@ -385,15 +385,6 @@ p{
     margin-top: 10px;
 }
 
-.paragrafos{
-    margin-top: 2%;
-}
-
-#tituloApresentacao{
-    display: none;
-    margin-top: 50px;
-}
-
 
 #acertos{
     position: absolute;
@@ -434,4 +425,6 @@ p{
     background-color: #0fcfd6;
 }
 
-
+textarea{
+    font-size: 17px;
+}

@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="#">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
 </head>
 <body>
     <div class="grid-container">
@@ -57,11 +59,12 @@
                         <span class="close" onclick="fecharModalVerificacao()">&times;</span>
                         <h3 id="tituloModal" class="tituloModal">Verificar acertos</h3>
                         <label for="lqJogoSorteado">Jogo sorteado:</label>
-                        <input type="text" id="jogo_sorteado" min="1" max="999" value="">
+                        <input type="text" id="jogo_sorteado" min="1" max="999" value="05-18-27-31-33-55">
                         <a id="btnVerificarModal" class="btnsPrincipais" onclick="verificarAcertos()" href="#">Verificar</a>
-                        <h4 id="tituloApresentacao">Jogos acertados:</h4>
-                        <div id="jogos_acertados"><br>
-                      </div>
+                        <div class="resultado">
+                            <label for="campo_resultado">Jogos acertados:</label>
+                            <textarea class="mt-2" cols="53" rows="13" id="campo_resultado" disabled></textarea>
+                          </div>
                     </form>
                 </div>
             </div>
