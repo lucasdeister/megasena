@@ -4,81 +4,91 @@
     <meta charset="UTF-8">
     <title>MEGA-SENA</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" href="#">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="grid-container">
         <header>
             <div class="cabecalho">
-                <h1>MEGA-SENA</h1>
+                <h3>MEGA-SENA</h3>
             </div>
         </header>
         <section id="myModal" class="modal">
-            <div class="container_modal">
-                <div class="modal-content">
-                    <form class="formPrincipal">
-                        <span class="close" onclick="fecharModalCriacao()">&times;</span>
-                        <h3 id="tituloModal" class="tituloModal">Criar jogo</h3>
-                        <input type="radio" onclick="exibirOpcoesTipoManual()" id="manual" name="tipo" value="Manual" checked>
-                        <label for="manual">Manual</label>
-                        <input type="radio" onclick="exibirOpcoesTipoAutomatico()" id="automatico" name="tipo" value="Automático">
-                        <label for="automatico">Automático</label><br><br>
-                        <input class="tpManual" id="campo_jogo_manual" type="text" onfocusout = "mask(document.getElementById('campo_jogo_manual').value)" value="">
-                        <a class="tpManual" id="btnGerarManual" onclick="gerarManual()" href="#">Gerar</a>
-                        <label class="tpAutomatico" for="lDezenas">Dezenas:</label>
-                        <input class="tpAutomatico" type="number" id="dezenas" min="6" max="15" value="6">
-                        <label class="tpAutomatico" for="lqtdJogos">Jogos:</label>
-                        <input class="tpAutomatico" type="number" id="qtdJogos" min="1" max="999" value="3">
-                        <a class="tpAutomatico" id="btnGerar" onclick="gerar()" href="#">Gerar</a>
-                    </form>
-                </div>
+            <div class="container">
+                <form class="formPrincipal-criacao">
+                    <span class="close" onclick="fecharModalCriacao()">&times;</span>
+                    <h3 class="tituloModal">Criar jogo</h3>
+                    <div class="agrupamentos">
+                        <div class="content-form">
+                            <div class="form-check form-check-inline ">
+                                <input type="radio" class="form-check-input" onclick="exibirOpcoesTipoManual()" id="manual" name="tipo" checked>
+                                <label for="manual" class="form-check-label">Manual</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-5">
+                                <input type="radio" class="form-check-input" onclick="exibirOpcoesTipoAutomatico()" id="automatico" name="tipo" >
+                                <label for="automatico" class="form-check-label">Automático</label>
+                            </div>
+                            <input tipo="manual" class="form-control mb-4 fs-5" id="campo_jogo_manual" placeholder="Jogo" type="text" onfocusout = "mask(document.getElementById('campo_jogo_manual').value)">
+                            <a tipo="manual" class="btn btn-outline-success w-100 mt-4" onclick="gerarManual()" id="btnGerarManual">Gerar</a>
+                            <input tipo="automatico" class="form-control mb-4 fs-5" id="dezenas" placeholder="Dezenas" type="number">
+                            <input tipo="automatico" class="form-control mb-4 fs-5 mb-5" id="qtdJogos" placeholder="Qtd" type="number">
+                            <button tipo="automatico" class="btn btn-outline-success w-100" onclick="gerar()">Gerar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </section>
         <section id="myModal2" class="modal">
-            <div class="container_modal2">
-                <div class="modal-content2" onclick="preencherCampoDezenaEdicao()">
-                    <form class="formPrincipal">
-                        <span class="close" onclick="fecharModalEdicao()">&times;</span>
-                        <h3 id="tituloModal" class="tituloModal">Editar jogo</h3>
-                        <label for="lqJogo">Jogo:</label>
-                        <input type="text" id="jogo_edicao" min="1" max="999" value="">
-                        <label for="lDezenas">Dezena:</label>
-                        <input type="number" id="dezenas_edicao" disabled>
-                        <a id="btnSalvar" onclick="editarJogo(item_editado)" href="#">Salvar</a>
-                    </form>
-                </div>
+            <div class="container">
+                <form class="formPrincipal-edicao" onclick="preencherCampoDezenaEdicao()">
+                    <span class="close" onclick="fecharModalEdicao()">&times;</span>
+                    <h3 id="tituloModal" class="tituloModal">Editar jogo</h3>
+                    <div class="row">
+                        <div class="mt-5 input-group">
+                            <label for="jogo_edicao" class="col-3 input-group-text ms-5">Jogo</label>
+                            <input type="text" class="form-control me-5" id="jogo_edicao">
+                        </div>
+                        <div class="mt-5 input-group">
+                            <label for="lDezenas" class="col-3 input-group-text ms-5">Dezena</label>
+                            <input type="number" class="form-control me-5" id="dezenas_edicao" disabled>
+                        </div>
+                        <button id="btnSalvar" class="btn btn-outline-success mt-5" onclick="editarJogo(item_editado)">Gravar</button>
+                    </div>
+                </form>
             </div>
         </section>
         <section id="myModal3" class="modal">
-            <div class="container_modal3">
-                <div class="modal-content3">
-                    <form class="formPrincipal">
+            <div class="container">
+                    <form class="formPrincipal-verificacao">
                         <span class="close" onclick="fecharModalVerificacao()">&times;</span>
                         <h3 id="tituloModal" class="tituloModal">Verificar acertos</h3>
-                        <label for="lqJogoSorteado">Jogo sorteado:</label>
-                        <input type="text" id="jogo_sorteado" min="1" max="999" value="">
-                        <a id="btnVerificarModal" class="btnsPrincipais" onclick="verificarAcertos()" href="#">Verificar</a>
-                        <div class="resultado">
+                        <div class="mt-5 input-group">
+                            <label for="jogo_sorteado" class="col-3 input-group-text ms-5">Jogo</label>
+                            <input type="text" class="form-control me-5" id="jogo_sorteado">
+                        </div>
+                        <a id="btnVerificarModal" class="btn btn-outline-success mt-4 mb-3 ms-5" onclick="verificarAcertos()">Verificar</a>
+                        <div class="resultado ms-5 me-5">
                             <label for="campo_resultado">Jogos acertados:</label>
-                            <textarea class="mt-2" cols="53" rows="13" id="campo_resultado" disabled></textarea>
-                          </div>
+                            <textarea class="form-control" cols="53" rows="10" id="campo_resultado" disabled></textarea>
+                        </div>
                     </form>
-                </div>
             </div>
         </section>
         <main>
-            <h2>Criar jogos Mega-Sena</h2>
-            <hr>
-            <a id="btnCriar" class="btnsPrincipais" onclick="exibirModalCriacao()">Criar</a>
-            <a id="btnCopiar" class="btnsPrincipais" onclick="copiarJogos('copiar')">Copiar</a>
-            <a id="btnVerificar" class="btnsPrincipais" onclick="exibirModalVerificacao()">Verificar acertos</a>
-            <a id="btnImportar" class="btnsPrincipais" onclick="importar()">Importar</a>
-            <a id="btnExportar" class="btnsPrincipais" onclick="exportarBase()">Exportar</a>
-            <a id="btnExcluirGrupo" class="btnExcluir" onclick="apagarGrid()">Limpar</a>
-            <table>
+            <h3 class="mt-3">Criar jogos Mega-Sena</h3>
+            <hr class="m-5">
+            <div class="container-fluid">
+                <button id="btnCriar" class="btn btn-outline-success btn-lg me-3 mb-3 text-dark" onclick="exibirModalCriacao()">Criar</button>
+                <button id="btnCopiar" class="btn btn-outline-warning btn-lg me-3 mb-3 text-dark" onclick="copiarJogos('copiar')">Copiar</button>
+                <button id="btnVerificar" class="btn btn-outline-primary btn-lg me-3 mb-3 text-dark" onclick="exibirModalVerificacao()">Verificar</button>
+                <button id="btnImportar" class="btn btn-outline-info btn-lg me-3 mb-3 text-dark" onclick="importar()">Importar</button>
+                <button id="btnExportar" class="btn btn-outline-secondary btn-lg me-3 mb-3 text-dark" onclick="exportarBase()">Exportar</button>
+                <button id="btnExcluirGrupo" class="btn btn-outline-danger btn-lg me-3 mb-3 text-dark" onclick="apagarGrid()">Limpar</button>
+            </div>
+            <table class="table table-striped table-hover table-borderless align-middle">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -101,8 +111,8 @@
             </div>
         </footer>
     </div>
+    <script type="text/javascript" src="../javascript/index.js"></script>
 </body>
-<script type="text/javascript" src="../javascript/index.js"></script>
 </html>
 
 

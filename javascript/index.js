@@ -2,9 +2,13 @@ var span = document.getElementsByClassName("close")[0];
 var modal = document.getElementById("myModal");
 var modal2 = document.getElementById("myModal2");
 var modal3 = document.getElementById("myModal3");
-const foraModal = document.getElementsByClassName('container_modal')[0];
-const foraModal2 = document.getElementsByClassName('container_modal2')[0];
-const foraModal3 = document.getElementsByClassName('container_modal3')[0];
+const foraModalCriacao1 = document.getElementsByClassName('modal')[0];
+const foraModalCriacao2 = document.getElementsByClassName('container')[0];
+const foraModalEdicao1 = document.getElementsByClassName('modal')[1];
+const foraModalEdicao2 = document.getElementsByClassName('container')[1];
+const foraModalVerificacao1 = document.getElementsByClassName('modal')[2];
+const foraModalVerificacao2 = document.getElementsByClassName('container')[2];
+
 let id = 1;
 let item_editado = 0;
 var objNumerosSorteados = [];
@@ -24,13 +28,13 @@ function exibirModalVerificacao(){
 }
 
 window.onclick = function(event) {
-  if (event.target == foraModal) {
+  if (event.target == foraModalCriacao1 || event.target == foraModalCriacao2) {
     fecharModalCriacao();
   }
-  if(event.target == foraModal2){
+  if(event.target ==  foraModalEdicao1 || event.target == foraModalEdicao2){
     fecharModalEdicao();
   }
-  if(event.target == foraModal3){
+  if(event.target ==  foraModalVerificacao1 || event.target == foraModalVerificacao2){
     fecharModalVerificacao();
   }
 }
@@ -69,7 +73,6 @@ function loadItens() {
 
 
 function gerar(){
-
   let dezena = document.querySelector('#dezenas').value;
   let qtdJogos = document.querySelector('#qtdJogos').value;
   let jogos = gerarJogos(dezena, qtdJogos);
@@ -93,11 +96,11 @@ function gerar(){
       <td>${itens[i].id}</td>
       <td>${itens[i].dezena}</td>
       <td class="jogos_tabela">${itens[i].jogo}</td>
-      <td class="acoes btnEditar" onclick="editItem(${i})">
-        <a><i class='bx bx-edit'></i></a>
+      <td onclick="editItem(${i})">
+        <button class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
       </td>
-      <td class="acoes btnExcluir" onclick="deleteItem(${i})">
-        <a><i class='bx bx-trash'></i></a>
+      <td onclick="deleteItem(${i})">
+        <button class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
       </td>`;
       tbody.appendChild(tr);
     }
@@ -187,35 +190,28 @@ function fecharModalVerificacao(){
 }
 
 function exibirOpcoesTipoAutomatico(){
-
   esconderOpcoesTipoManual();
-
-  for(let i = 0; i < 5; i++){
-    document.getElementsByClassName('tpAutomatico')[i].style.display = 'inline-block';
-  }
+  document.querySelectorAll("input[tipo='automatico']")[0].style.display = 'block';
+  document.querySelectorAll("input[tipo='automatico']")[1].style.display = 'block';
+  document.querySelector("button[tipo='automatico']").style.display = 'inline-block';
 }
 
 function esconderOpcoesTipoAutomatico(){
-  for(let i = 0; i < 5; i++){
-    document.getElementsByClassName('tpAutomatico')[i].style.display = 'none';
-  }
+  document.querySelectorAll("input[tipo='automatico']")[0].style.display = 'none';
+  document.querySelectorAll("input[tipo='automatico']")[1].style.display = 'none';
+  document.querySelector("button[tipo='automatico']").style.display = 'none';
 }
 
 function exibirOpcoesTipoManual(){
-
   esconderOpcoesTipoAutomatico();
-
-  for(let i = 0; i < 2; i++){
-    document.getElementsByClassName('tpManual')[i].style.display = 'inline-block';
-  }
+  document.querySelector("input[tipo='manual']").style.display = 'block';
+  document.querySelector("a[tipo='manual']").style.display = 'inline-block';
 }
 
 function esconderOpcoesTipoManual(){
-  for(let i = 0; i < 2; i++){
-    document.getElementsByClassName('tpManual')[i].style.display = 'none';
-  }
+    document.querySelector("input[tipo='manual']").style.display = 'none';
+    document.querySelector("a[tipo='manual']").style.display = 'none';
 }
-
 
 function verificarDezenaJogo(jogo_manual){
 
@@ -231,6 +227,7 @@ function verificarDezenaJogo(jogo_manual){
 
 document.getElementById('campo_jogo_manual').addEventListener("keypress", function(event){
   if (event.key === "Enter") {
+    event.preventDefault();
     mask(document.getElementById('campo_jogo_manual').value);
     document.getElementById("btnGerarManual").click();
   }
