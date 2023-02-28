@@ -287,7 +287,7 @@ function gerarManual(){
           }
           z++;
         }
-        if(z == arrayAux[i].length && qtd_acertos > 3){
+        if(qtd_acertos == 6 || z == arrayAux[i].length && qtd_acertos > 3){
           preencherObjJogosPremiadosNoArray(arrayPrincipal[i], qtd_acertos);
           qtd_acertos = 0;
           z = 0;
