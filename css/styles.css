@@ -33,19 +33,9 @@ h1, h2{
     margin-bottom: 40px;
 }
 
-tr{
-    height: 130px;
-}
 
 
 
-th {
-    width: 6650px;
-}
-
-th, td{
-    font-size: 18px;
-}
 
 
 hr{
@@ -198,4 +188,13 @@ textarea{
 
 button, a{
     border-width: 2px !important;
+}
+
+
+th {
+    width: 500px;
+} 
+
+th, td{
+    font-size: 18px;
 }

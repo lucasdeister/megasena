@@ -95,12 +95,10 @@ function gerar(){
       tr.innerHTML = `
       <td>${itens[i].id}</td>
       <td>${itens[i].dezena}</td>
-      <td class="jogos_tabela">${itens[i].jogo}</td>
-      <td onclick="editItem(${i})">
-        <button class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
-      </td>
-      <td onclick="deleteItem(${i})">
-        <button class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
+      <td>${itens[i].jogo}</td>
+      <td>
+        <button onclick="editItem(${i})" class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
+        <button onclick="deleteItem(${i})" class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
       </td>`;
       tbody.appendChild(tr);
     }
