@@ -95,7 +95,7 @@ function gerar(){
       tr.innerHTML = `
       <td>${itens[i].id}</td>
       <td>${itens[i].dezena}</td>
-      <td>${itens[i].jogo}</td>
+      <td class="jogos_tabela">${itens[i].jogo}</td>
       <td>
         <button onclick="editItem(${i})" class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
         <button onclick="deleteItem(${i})" class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
@@ -361,27 +361,22 @@ function gerarManual(){
     }
 
     return arrayNumerosSorteados;
-
   }
 
 function habilitarBotaoCopiar(){
-  document.getElementById('btnCopiar').style.opacity = '1';
-  document.getElementById('btnCopiar').style.cursor = 'pointer';
+  document.getElementById('btnCopiar').disabled = false
 }
 
-function habilitarBotaoExportar(){
-  document.getElementById('btnCopiar').style.opacity = '1';
-  document.getElementById('btnCopiar').style.cursor = 'pointer';
+function desabilitarBotaoCopiar(){
+  document.getElementById('btnCopiar').disabled = true
 }
-
 
  function copiarJogos(acao){
 
   let str = '';
 
   if(acao == 'copiar'){
-    document.getElementById('btnCopiar').style.opacity = '0.5';
-    document.getElementById('btnCopiar').style.cursor = 'initial';
+    desabilitarBotaoCopiar();
   }
 
   for (let i = 0; i < itens.length; i++) {
