@@ -49,20 +49,34 @@ const tbody = document.querySelector('tbody');
 let itens = 0;
 
 function deleteItem(index) {
-  itens.splice(index, 1);
-  setItensBD();
-  loadItens();
-   if(localStorage.dbfunc == '[]'){
-      id = 1;
-   }
-}
 
+  let objetoParaExcluir = '';
+
+  for(let i = 0; i < itens.length; i++){
+    if(index === itens[i].id){
+      objetoParaExcluir = itens[i];
+      break;
+    }
+  }
+
+  const tabela = document.getElementsByTagName("table")[0];
+  const indiceParaExcluir = itens.indexOf(objetoParaExcluir);
+  
+  itens.splice(indiceParaExcluir, 1);
+  tabela.deleteRow(indiceParaExcluir + 1);
+
+  setItensBD();
+  if(localStorage.dbfunc == '[]'){
+    id = 1;
+  }
+}
 
 const apagarGrid = () => {
   localStorage.clear();
   id = 1;
-  loadItens(); 
-}
+  tbody.innerHTML = '';
+  itens = [];
+} 
 
 
 function loadItens() {
@@ -88,6 +102,22 @@ function gerar(){
   fecharModalCriacao();
 }
 
+function insertItemUnico(item) {
+
+    let tr = document.createElement('tr');
+    tr.innerHTML = `
+    <td>${item.id}</td>
+    <td>${item.dezena}</td>
+    <td class="jogos_tabela">${item.jogo}</td>
+    <td>
+      <button onclick="editItem(${item.id})" class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
+      <button onclick="deleteItem(${item.id})" class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
+    </td>`;
+    tbody.appendChild(tr);
+  }
+
+
+
   function insertItem(itens) {
 
     for (const i in itens) {
@@ -97,8 +127,8 @@ function gerar(){
       <td>${itens[i].dezena}</td>
       <td class="jogos_tabela">${itens[i].jogo}</td>
       <td>
-        <button onclick="editItem(${i})" class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
-        <button onclick="deleteItem(${i})" class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
+        <button onclick="editItem(${itens[i].id})" class="btn btn-outline-primary btn-lg text-dark"><i class='bx bx-edit'></i></button>
+        <button onclick="deleteItem(${itens[i].id})" class="btn btn-outline-danger btn-lg text-dark"><i class='bx bx-trash'></i></button>
       </td>`;
       tbody.appendChild(tr);
     }
@@ -148,14 +178,25 @@ function gerarJogoUnico(dezenas){
 }
 
 function editItem(index) {
-  item_editado = index;
   exibirModalEdicao();
   preencherCamposEdicao(index);
 }
 
 function preencherCamposEdicao(index){
-  dezenas_edicao.value = itens[index].dezena;
-  jogo_edicao.value = itens[index].jogo.replaceAll(',', '-');
+
+  let objetoParaEditar = '';
+
+  for(let i = 0; i < itens.length; i++){
+    if(index === itens[i].id){
+      objetoParaEditar = itens[i];
+      break;
+    }
+  }
+
+  const indiceParaEditar = itens.indexOf(objetoParaEditar);
+  dezenas_edicao.value = itens[indiceParaEditar].dezena;
+  jogo_edicao.value = itens[indiceParaEditar].jogo.replaceAll(',', '-');
+  item_editado = indiceParaEditar;
 }
 
 function editarJogo(index){
@@ -163,9 +204,8 @@ function editarJogo(index){
   let dezena_jogo_edicao = verificarDezenaJogo(jogo_edicao.value);
 
    itens[index].jogo = jogo_edicao.value;
-   itens[index].dezena =  dezena_jogo_edicao;
+   itens[index].dezena = dezena_jogo_edicao;
    setItensBD();
-   loadItens();
    fecharModalEdicao();
 }
 
@@ -241,7 +281,8 @@ function gerarManual(){
   itens.push({'id': id, 'dezena': dezena_jogo, 'jogo': jogo_manual})
   id++;
   setItensBD();
-  loadItens();
+  let ultimoObjeto = itens[itens.length - 1];
+  insertItemUnico(ultimoObjeto);
   document.querySelector('#campo_jogo_manual').value = '';
 }
 

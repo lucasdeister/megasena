@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>MEGA-SENA</title>
@@ -9,6 +10,7 @@
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="grid-container">
         <header>
@@ -24,14 +26,17 @@
                     <div class="agrupamentos">
                         <div class="content-form">
                             <div class="form-check form-check-inline ">
-                                <input type="radio" class="form-check-input" onclick="exibirOpcoesTipoManual()" id="manual" name="tipo" checked>
+                                <input type="radio" class="form-check-input" onclick="exibirOpcoesTipoManual()"
+                                    id="manual" name="tipo" checked>
                                 <label for="manual" class="form-check-label">Manual</label>
                             </div>
                             <div class="form-check form-check-inline mb-5">
-                                <input type="radio" class="form-check-input" onclick="exibirOpcoesTipoAutomatico()" id="automatico" name="tipo" >
+                                <input type="radio" class="form-check-input" onclick="exibirOpcoesTipoAutomatico()"
+                                    id="automatico" name="tipo">
                                 <label for="automatico" class="form-check-label">Automático</label>
                             </div>
-                            <input tipo="manual" class="form-control mb-4 fs-5" id="campo_jogo_manual" placeholder="Jogo" type="text" onfocusout = "mask(document.getElementById('campo_jogo_manual').value)">
+                            <input tipo="manual" class="form-control mb-4 fs-5" id="campo_jogo_manual" placeholder="Jogo" type="text"
+                            onfocusout="mask(document.getElementById('campo_jogo_manual').value)">
                             <a tipo="manual" class="btn btn-outline-success w-100 mt-4" onclick="gerarManual()" id="btnGerarManual">Gerar</a>
                             <input tipo="automatico" class="form-control mb-4 fs-5" id="dezenas" placeholder="Dezenas" type="number">
                             <input tipo="automatico" class="form-control mb-4 fs-5 mb-5" id="qtdJogos" placeholder="Qtd" type="number">
@@ -55,26 +60,28 @@
                             <label for="lDezenas" class="col-3 input-group-text ms-5">Dezena</label>
                             <input type="number" class="form-control me-5" id="dezenas_edicao" disabled>
                         </div>
-                        <button id="btnSalvar" class="btn btn-outline-success mt-5" onclick="editarJogo(item_editado)">Gravar</button>
+                        <button id="btnSalvar" class="btn btn-outline-success mt-5"
+                            onclick="editarJogo(item_editado)">Gravar</button>
                     </div>
                 </form>
             </div>
         </section>
         <section id="myModal3" class="modal">
             <div class="container">
-                    <form class="formPrincipal-verificacao">
-                        <span class="close" onclick="fecharModalVerificacao()">&times;</span>
-                        <h3 id="tituloModal" class="tituloModal">Verificar acertos</h3>
-                        <div class="mt-5 input-group">
-                            <label for="jogo_sorteado" class="col-3 input-group-text ms-5">Jogo</label>
-                            <input type="text" class="form-control me-5" id="jogo_sorteado">
-                        </div>
-                        <a id="btnVerificarModal" class="btn btn-outline-success mt-4 mb-3 ms-5" onclick="verificarAcertos()">Verificar</a>
-                        <div class="resultado ms-5 me-5">
-                            <label for="campo_resultado">Jogos acertados:</label>
-                            <textarea class="form-control" cols="53" rows="10" id="campo_resultado" disabled></textarea>
-                        </div>
-                    </form>
+                <form class="formPrincipal-verificacao">
+                    <span class="close" onclick="fecharModalVerificacao()">&times;</span>
+                    <h3 id="tituloModal" class="tituloModal">Verificar acertos</h3>
+                    <div class="mt-5 input-group">
+                        <label for="jogo_sorteado" class="col-3 input-group-text ms-5">Jogo</label>
+                        <input type="text" class="form-control me-5" id="jogo_sorteado">
+                    </div>
+                    <a id="btnVerificarModal" class="btn btn-outline-success mt-4 mb-3 ms-5"
+                        onclick="verificarAcertos()">Verificar</a>
+                    <div class="resultado ms-5 me-5">
+                        <label for="campo_resultado">Jogos acertados:</label>
+                        <textarea class="form-control" cols="53" rows="10" id="campo_resultado" disabled></textarea>
+                    </div>
+                </form>
             </div>
         </section>
         <main>
@@ -100,19 +107,20 @@
                 <tbody>
                 </tbody>
             </table>
-        </main>  
+        </main>
         <footer>
             <div class="container-rodape">
                 <div class="descricao">Design by - Lucas Deister</div>
                 <a class="icones" href="https://www.instagram.com/lucasdeister7/">
-                <img src="..\icones\icons8-instagram-32.png" alt="instagram"></a>
+                    <img src="..\icones\icons8-instagram-32.png" alt="instagram"></a>
                 <a class="icones" href="mailto:lucasdeister7@hotmail.com">
-                <img src="..\icones\icons8-mensagem-32.png" alt="email"></a> 
+                    <img src="..\icones\icons8-mensagem-32.png" alt="email"></a>
             </div>
         </footer>
     </div>
     <script type="text/javascript" src="../javascript/index.js"></script>
 </body>
+
 </html>
 
 
