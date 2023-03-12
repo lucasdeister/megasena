@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>MEGA-SENA</title>
@@ -10,7 +9,6 @@
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
-
 <body>
     <div class="grid-container">
         <header>
@@ -40,7 +38,7 @@
                             <a tipo="manual" class="btn btn-outline-success w-100 mt-4" onclick="gerarManual()" id="btnGerarManual">Gerar</a>
                             <input tipo="automatico" class="form-control mb-4 fs-5" id="dezenas" placeholder="Dezenas" type="number">
                             <input tipo="automatico" class="form-control mb-4 fs-5 mb-5" id="qtdJogos" placeholder="Qtd" type="number">
-                            <button tipo="automatico" class="btn btn-outline-success w-100" onclick="gerar()">Gerar</button>
+                            <a tipo="automatico" class="btn btn-outline-success w-100" onclick="gerar()">Gerar</a>
                         </div>
                     </div>
                 </form>
@@ -60,8 +58,8 @@
                             <label for="lDezenas" class="col-3 input-group-text ms-5">Dezena</label>
                             <input type="number" class="form-control me-5" id="dezenas_edicao" disabled>
                         </div>
-                        <button id="btnSalvar" class="btn btn-outline-success mt-5"
-                            onclick="editarJogo(item_editado)">Gravar</button>
+                        <a id="btnSalvar" class="btn btn-outline-success mt-5"
+                            onclick="editarJogo(item_editado)">Gravar</a>
                     </div>
                 </form>
             </div>
@@ -88,12 +86,12 @@
             <h3 class="mt-3">Criar jogos Mega-Sena</h3>
             <hr class="m-5">
             <div class="container-fluid">
-                <button id="btnCriar" class="btn btn-outline-success btn-lg me-3 mb-3 text-dark" onclick="exibirModalCriacao()">Criar</button>
-                <button id="btnCopiar" class="btn btn-outline-warning btn-lg me-3 mb-3 text-dark" onclick="copiarJogos('copiar')">Copiar</button>
-                <button id="btnVerificar" class="btn btn-outline-primary btn-lg me-3 mb-3 text-dark" onclick="exibirModalVerificacao()">Verificar</button>
-                <button id="btnImportar" class="btn btn-outline-info btn-lg me-3 mb-3 text-dark" onclick="importar()">Importar</button>
-                <button id="btnExportar" class="btn btn-outline-secondary btn-lg me-3 mb-3 text-dark" onclick="exportarBase()">Exportar</button>
-                <button id="btnExcluirGrupo" class="btn btn-outline-danger btn-lg me-3 mb-3 text-dark" onclick="apagarGrid()">Limpar</button>
+                <a id="btnCriar" class="btn btn-outline-success btn-lg me-3 mb-3 text-dark" onclick="exibirModalCriacao()">Criar</a>
+                <a id="btnCopiar" class="btn btn-outline-warning btn-lg me-3 mb-3 text-dark" onclick="copiarJogos('copiar')">Copiar</a>
+                <a id="btnVerificar" class="btn btn-outline-primary btn-lg me-3 mb-3 text-dark" onclick="exibirModalVerificacao()">Verificar</a>
+                <a id="btnImportar" class="btn btn-outline-info btn-lg me-3 mb-3 text-dark" onclick="importar()">Importar</a>
+                <a id="btnExportar" class="btn btn-outline-secondary btn-lg me-3 mb-3 text-dark" onclick="exportarBase()">Exportar</a>
+                <a id="btnExcluirGrupo" class="btn btn-outline-danger btn-lg me-3 mb-3 text-dark" onclick="apagarGrid()">Limpar</a>
             </div>
             <table class="table table-striped table-hover table-borderless align-middle">
                 <thead>
@@ -107,6 +105,7 @@
                 <tbody>
                 </tbody>
             </table>
+            <br>
         </main>
         <footer>
             <div class="container-rodape">

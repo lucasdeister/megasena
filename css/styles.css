@@ -106,7 +106,7 @@ hr{
     cursor: pointer;
   }
 
-label, input[type=button]{
+label, input[type=a]{
     margin-left: 10px;
   } 
 
@@ -117,7 +117,7 @@ label, input[type=button]{
     background-color: rgba(0,0,0,0.4);
   }
 
-input[tipo=automatico], button[tipo=automatico]{
+input[tipo=automatico], a[tipo=automatico]{
     display: none;
 }
 
@@ -186,7 +186,7 @@ textarea{
     width: 85%;
 }
 
-button, a{
+a{
     border-width: 2px !important;
 }
 
