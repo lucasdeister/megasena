@@ -9,7 +9,6 @@ const foraModalEdicao2 = document.getElementsByClassName('container')[1];
 const foraModalVerificacao1 = document.getElementsByClassName('modal')[2];
 const foraModalVerificacao2 = document.getElementsByClassName('container')[2];
 
-let id = 1;
 let item_editado = 0;
 var objNumerosSorteados = [];
 
@@ -50,8 +49,8 @@ function deleteItem(index) {
 
   let objetoParaExcluir = '';
 
-  for (let i = 0; i < itens.length; i++) {
-    if (index === itens[i].id) {
+  for (const i in itens) {
+    if (index == itens[i].id) {
       objetoParaExcluir = itens[i];
       break;
     }
@@ -64,14 +63,10 @@ function deleteItem(index) {
   tabela.deleteRow(indiceParaExcluir + 1);
 
   setItensBD();
-  if (localStorage.dbfunc == '[]') {
-    id = 1;
-  }
 }
 
 const apagarGrid = () => {
   localStorage.clear();
-  id = 1;
   tbody.innerHTML = '';
   itens = [];
 }
@@ -86,16 +81,13 @@ function gerar() {
   let qtdJogos = document.querySelector('#qtdJogos').value;
   let jogos = gerarJogos(dezena, qtdJogos);
 
-  itens = [];
-
   for (const i in jogos) {
     jogos[i] = jogos[i].join('-');
-    itens.push({ 'id': id, 'dezena': dezena, 'jogo': jogos[i] })
-    id++;
+    itens.push({ 'id': getProxIDJogos(), 'dezena': dezena, 'jogo': jogos[i] })
+    insertItemUnico(itens[itens.length - 1]);
   }
 
   setItensBD();
-  insertItem(itens);
   fecharModalCriacao();
 }
 
@@ -277,22 +269,15 @@ document.getElementById('campo_jogo_manual').addEventListener("keypress", functi
 
 function gerarManual() {
 
-  itens = [];
-
   document.getElementById('campo_jogo_manual').focus();
-
   let jogo_manual = document.querySelector('#campo_jogo_manual').value;
-
   const dezena_jogo = verificarDezenaJogo(jogo_manual);
-  itens.push({ 'id': id, 'dezena': dezena_jogo, 'jogo': jogo_manual })
-  id++;
+  itens.push({ 'id': getProxIDJogos(), 'dezena': dezena_jogo, 'jogo': jogo_manual });
   setItensBD();
   let ultimoObjeto = itens[itens.length - 1];
   insertItemUnico(ultimoObjeto);
   document.querySelector('#campo_jogo_manual').value = '';
 }
-
-
 
 function preencherObjJogosPremiadosNoArray(jogo_premiado, qtd_acertos) {
 
@@ -491,8 +476,7 @@ function importarBase(conteudo_base) {
   arrayJogosImportacao = formatarNumeros(arrayJogosImportacao);
 
   for (const i in newArray) {
-    itens.push({ 'id': id, 'dezena': newArray[i].length, 'jogo': arrayJogosImportacao[i] })
-    id++;
+    itens.push({ 'id': getProxIDJogos(), 'dezena': newArray[i].length, 'jogo': arrayJogosImportacao[i] })
   }
   setItensBD();
   insertItem(itens);
@@ -516,4 +500,18 @@ input.onchange = e => {
 
 function importar() {
   abrirModalSelecaoArquivo();
+}
+
+function getProxIDJogos() {
+
+  let proximoID = 0;
+
+  if (itens.length == 0) {
+    proximoID = 1;
+  }
+  else {
+    proximoID = itens[itens.length - 1].id + 1;
+  }
+
+  return proximoID;
 }
