@@ -136,33 +136,19 @@ function gerarJogos(dezenas, qtdJogos) {
   return vetJogos;
 }
 
-function gerarJogoUnico(dezenas) {
 
-  const qtdNumerosPossiveis = 60;
-  let vetNumeros = [];
+function gerarJogoUnico(dezenas){
 
-  let numeroGerado = 0;
-
-  for (let i = 0; i < dezenas; i++) {
-    numeroGerado = Math.floor(Math.random() * qtdNumerosPossiveis) + 1;
-    if (numeroGerado < 10) {
-      numeroGerado = "0" + numeroGerado;
+    const qtdNumerosPossiveis = 60;
+    const numeros = new Set();
+  
+    while (numeros.size < dezenas) {
+      const numeroGerado = (Math.floor(Math.random() * qtdNumerosPossiveis) + 1).toString().padStart(2, '0');
+      numeros.add(numeroGerado);
     }
-    while (vetNumeros.includes(numeroGerado)) {
-      numeroGerado = Math.floor(Math.random() * qtdNumerosPossiveis) + 1;
-      if (numeroGerado < 10) {
-        numeroGerado = "0" + numeroGerado;
-      }
-      if (vetNumeros.includes(numeroGerado) == false) {
-        break;
-      }
-    }
-    vetNumeros[i] = numeroGerado;
+  
+    return Array.from(numeros).sort(function (a, b) { return a - b; });
   }
-  vetNumeros = vetNumeros.sort(function (a, b) { return a - b; });
-
-  return vetNumeros;
-}
 
 function editItem(index) {
   exibirModalEdicao();

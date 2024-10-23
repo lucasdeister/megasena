@@ -1,7 +1,7 @@
 *{
     padding: 0;
     margin: 0;
-    font-family: 'Lucida Sans';
+    font-family: 'Calibri';
 }
 
 header { grid-area: header; }
@@ -32,11 +32,6 @@ h1, h2{
     font-size: 25px;
     margin-bottom: 40px;
 }
-
-
-
-
-
 
 hr{
     margin: 1em 0;
@@ -181,7 +176,6 @@ textarea{
     }
 }
 
-
 #btnVerificarModal{
     width: 85%;
 }
@@ -189,7 +183,6 @@ textarea{
 a{
     border-width: 2px !important;
 }
-
 
 th {
     width: 500px;
